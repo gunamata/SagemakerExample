@@ -20,17 +20,17 @@ like a regular Python script. The EC2 server that
 will run this script will be initialized with the following directories:
 
 /opt/ml
-├── input
-│   ├── config
-│   │   ├── hyperparameters.json
-│   │   └── resourceConfig.json
-│   └── data
-│       └── <channel_name> example: training
-│           └── <input data>
-├── model
-│   └── <model files>
-└── output
-    └── failure 
+??? input
+?   ??? config
+?   ?   ??? hyperparameters.json
+?   ?   ??? resourceConfig.json
+?   ??? data
+?       ??? <channel_name> example: training
+?           ??? <input data>
+??? model
+?   ??? <model files>
+??? output
+    ??? failure 
     
 The input:
 
@@ -99,8 +99,8 @@ def train():
         data_df = pd.read_csv(data_input_file, header=None)
 
         # labels are in the first column
-        labels = data_df.ix[:, 0]
-        features = data_df.ix[:, 1:]
+        labels = data_df.iloc[:, 0]
+        features = data_df.iloc[:, 1:]
 
         train_features, test_features, labels_train, labels_test = \
             train_test_split(
