@@ -49,7 +49,7 @@ sudo make install
 cd ..
 rm Python-3.6.0.tar.xz
 sudo rm -rf Python-3.6.0
-
+export PATH=$PATH:/usr/local/bin
 
 # Create virtualenv running Python 3.6
 sudo yum install -y python2-pip
