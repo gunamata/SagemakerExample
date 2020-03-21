@@ -7,7 +7,7 @@ It is inspired by [Sagify](https://github.com/Kenza-AI/sagify) and [Amazon SageM
 ## Requirements
 
 1. Python 3.6 is installed
-2. `mkvirtualenv packt-sagemaker`. Make sure the virtualenv is activated after you create it.
+2. `mkvirtualenv python36-sagemaker`. Make sure the virtualenv is activated after you create it.
 3. `pip install jupyter sagemaker numpy scipy scikit-learn pandas`
 
 ## How Amazon SageMaker Runs Training and Prediction

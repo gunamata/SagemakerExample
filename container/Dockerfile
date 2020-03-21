@@ -4,7 +4,7 @@
 
 FROM python:3.6-slim-stretch
 
-MAINTAINER Pavlos Mitsoulis Ntompos <p.mitsoulis@gmail.com>
+MAINTAINER Guna Matamalam <gunasekhar@outlook.com>
 
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
          nginx \
