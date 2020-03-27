@@ -6,6 +6,8 @@ This example shows how to train and deploy a Machine Learning model using 2 appr
 
 ## 1. Amazon Sagemaker Approach
 
+Prerequisites:
+
 1. Python 3.6,  docker are installed
 2. `mkvirtualenv python36-sagemaker`. Make sure the virtualenv is activated after you create it.
 3. `pip install jupyter sagemaker numpy scipy scikit-learn pandas`
