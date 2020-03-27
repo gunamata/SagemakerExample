@@ -6,12 +6,13 @@ This example shows how to train and deploy a Machine Learning model using 2 appr
 
 ## 1. Amazon Sagemaker Approach
 
-Prerequisites:
+Steps to get the example working:
 
 1. Python 3.6,  docker are installed
 2. `mkvirtualenv python36-sagemaker`. Make sure the virtualenv is activated after you create it.
 3. `pip install jupyter sagemaker numpy scipy scikit-learn pandas`
-4. Create a new IAM User. You can use an existing IAM User as well but make sure you know the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY of the user account.
+4. Create a new IAM User. You can use an existing IAM User as well but make sure you know 
+   the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY of the user account.
 5. Add a profile with a name (Ex:up-sagemaker) in the .aws/credentials file as below.
 	[up-sagemaker]
 	aws_access_key_id = <your-access-key-id>
@@ -29,6 +30,12 @@ Prerequisites:
 	IAMReadOnlyAccess
 	AmazonSageMakerFullAccess
 	AmazonEC2FullAccess
+8. Run \container\build_and_push.sh to build a docker image with all the software (Python, Libraries etc) and 
+the source code (logic to train, serve, predict) included.
+	build_and_push.sh <image-name> <profile>
+	Example: build_and_push.sh iris-model up-sagemaker.
+	Note: This script needs to be run from "container" folder in the source code.
+9. Run cells in the juPyter notebook train_and_deploy_your_first_model_on_sagemaker.ipynb to train, deploy, test the model.
 	
 That's all for the prerequisites and setup.
 
