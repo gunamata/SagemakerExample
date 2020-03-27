@@ -11,6 +11,26 @@ Prerequisites:
 1. Python 3.6,  docker are installed
 2. `mkvirtualenv python36-sagemaker`. Make sure the virtualenv is activated after you create it.
 3. `pip install jupyter sagemaker numpy scipy scikit-learn pandas`
+4. Create a new IAM User. You can use an existing IAM User as well but make sure you know the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY of the user account.
+5. Add a profile with a name (Ex:up-sagemaker) in the .aws/credentials file as below.
+	[up-sagemaker]
+	aws_access_key_id = <your-access-key-id>
+	aws_secret_access_key = <yout-secret-access-key>
+   
+5. Create an AWS role. For example, SagemakerRole
+6. Add a configuration to the .aws/config file
+	[profile up-sagemaker]
+	region = <your-aws-region>
+	role_arn = <arn of the role created in Step 5>
+	source_profile = up-sagemaker
+7. Attach below persmission policies to the IAM role created in Step 5
+	AmazonEC2ContainerRegistryFullAccess
+	AmazonS3FullAccess
+	IAMReadOnlyAccess
+	AmazonSageMakerFullAccess
+	AmazonEC2FullAccess
+	
+That's all for the prerequisites and setup.
 
 ## How Amazon SageMaker Runs Training and Prediction
 
