@@ -1,12 +1,12 @@
-# Your First Machine Learning Model on SageMaker
+# Build and deploy a Machine Learning model using AWS Sagemaker & Lambda
 
-This example shows how to train and deploy a scikit-learn based Machine Learning model on Amazon SageMaker.
+This example shows how to train and deploy a Machine Learning model using 2 approaches 
+1. Amazon SageMaker 
+2. AWS Lambda
 
-It is inspired by [Sagify](https://github.com/Kenza-AI/sagify) and [Amazon SageMaker Examples](https://github.com/awslabs/amazon-sagemaker-examples).
+## 1. Amazon Sagemaker Approach
 
-## Requirements
-
-1. Python 3.6 is installed
+1. Python 3.6,  docker are installed
 2. `mkvirtualenv python36-sagemaker`. Make sure the virtualenv is activated after you create it.
 3. `pip install jupyter sagemaker numpy scipy scikit-learn pandas`
 
