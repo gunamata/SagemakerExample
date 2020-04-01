@@ -8,36 +8,52 @@ This example shows how to train and deploy a Machine Learning model using 2 appr
 
 Steps to get the example working:
 
-1. Python 3.6,  docker are installed
+1. Install Python 3.6,  docker if not avaialable on your machine already
 2. `mkvirtualenv python36-sagemaker`. Make sure the virtualenv is activated after you create it.
 3. `pip install jupyter sagemaker numpy scipy scikit-learn pandas`
 4. Create a new IAM User. You can use an existing IAM User as well but make sure you know 
    the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY of the user account.
 5. Add a profile with a name (Ex:up-sagemaker) in the .aws/credentials file as below.
-	[up-sagemaker]
+	`[up-sagemaker]
 	aws_access_key_id = <your-access-key-id>
-	aws_secret_access_key = <yout-secret-access-key>
+	aws_secret_access_key = <yout-secret-access-key>`
    
 5. Create an AWS role. For example, SagemakerRole
 6. Add a configuration to the .aws/config file
-	[profile up-sagemaker]
+	`[profile up-sagemaker]
 	region = <your-aws-region>
-	role_arn = <arn of the role created in Step 5>
+	role_arn = <arn of the role created in Step 5>`
 	source_profile = up-sagemaker
 7. Attach below persmission policies to the IAM role created in Step 5
-	AmazonEC2ContainerRegistryFullAccess
+	`AmazonEC2ContainerRegistryFullAccess
 	AmazonS3FullAccess
 	IAMReadOnlyAccess
 	AmazonSageMakerFullAccess
-	AmazonEC2FullAccess
+	AmazonEC2FullAccess`
 8. Run \container\build_and_push.sh to build a docker image with all the software (Python, Libraries etc) and 
 the source code (logic to train, serve, predict) included.
-	build_and_push.sh <image-name> <profile>
+	`build_and_push.sh <image-name> <profile>
 	Example: build_and_push.sh iris-model up-sagemaker.
-	Note: This script needs to be run from "container" folder in the source code.
+	Note: This script needs to be run from "container" folder in the source code.`
 9. Run cells in the juPyter notebook train_and_deploy_your_first_model_on_sagemaker.ipynb to train, deploy, test the model.
 	
 That's all for the prerequisites and setup.
+
+## 1. Amazon AWS, API Gateway Approach (serverless framework)
+
+1. Install Python 3.6,  node, npm if not avaialable on your machine already
+2. Install serverless framework
+   `npm install -g serverless`
+   Note: Always run npm commands as admin to avoid problems.
+3. Install npm packages required for the serverless project. This command installs npm modules under "node_modules" folder.
+   `npm install`
+4. Set below environment variables to be able to deploy, debug your serverless app onto AWS
+   `export AWS_ACCESS_KEY_ID=<your-key-here>
+    export AWS_SECRET_ACCESS_KEY=<your-secret-key-here>
+    export PIP_DEFAULT_TIMEOUT=100
+    export SLS_DEBUG=*`
+5. Deploy the app to AWS cloud
+    `serverless deploy`
 
 ## How Amazon SageMaker Runs Training and Prediction
 

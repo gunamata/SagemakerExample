@@ -7,28 +7,31 @@ import pickle
 import pandas as pd
 
 strBucket = 'sagemaker-us-east-1-298573704325'
+strBucketKey = 'up-lambda-iris-model/'
+strModelFilename = 'model.pkl'
+strLocalTempDir = '/tmp/model/'
+
+def get_model(src, dest):
+    global strBucket
+    bucket = boto3.resource('s3').Bucket(strBucket)
+    bucket.download_file(src, dest)
+    with open(dest,'rb') as inp:
+        model = pickle.load(inp)
+    return model
+
+def predict(input):
+    global strBucketKey, strModelFilename, strLocalTempDir
+    if not os.path.exists(strLocalTempDir):
+        os.makedirs(strLocalTempDir)
+    src = strBucketKey + strModelFilename
+    dest = strLocalTempDir + strModelFilename
+    model = get_model(src,dest)
+    return model.predict(input)
 
 def handler(event, context):
-    if isinstance(event['body'], (unicode, str)):
-        sample = json.loads(event['body'])    
-    result = predict(sample)
-    return {'StatusCode':200,
-    'body':result[0]}  
-
-def predict(sample):
-    global strBucket
-    if not os.path.exists('/tmp/model/'):
-        os.makedirs('/tmp/model/')
-    dest = '/tmp/model/model.pkl'
-    src = '/up-lambda-iris-model/model.pkl'
-    model = get_model(strBucket,src,dest)
-    result = model.predict(sample)
-    return result
-        
-def get_model(strBucket,src,dest):
-    bucket= boto3.resource('s3').Bucket(strBucket)
-    bucket.download_file(src,dest)
-    with open(os.path(dest), 'rb') as inp:
-	    model = pickle.load(inp)
-    return(model)      
-
+    data = event['body']
+    data_dict = json.loads(data)
+    data_df = pd.DataFrame.from_dict(data_dict)
+    predictions =  predict(data_df.values)
+    ret =  { "headers": { "Content-Type": "application/json" }, "statusCode": 200, "body": np.array2string(predictions) }
+    return ret
