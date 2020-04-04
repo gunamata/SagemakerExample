@@ -35,4 +35,4 @@ functions:
   description : deploy trained lightgbm on aws lambda using serverless
   handler: index.handler
   events :
-   - http : POST /invocations  
+   - http : POST /invocations 

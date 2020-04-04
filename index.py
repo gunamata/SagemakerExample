@@ -33,5 +33,8 @@ def handler(event, context):
     data_dict = json.loads(data)
     data_df = pd.DataFrame.from_dict(data_dict)
     predictions =  predict(data_df.values)
-    ret =  { "headers": { "Content-Type": "application/json" }, "statusCode": 200, "body": np.array2string(predictions) }
-    return ret
+    body = { "predictions": np.array2string(predictions) }
+    ret =  { "headers": { "Content-Type": "application/json" }, "statusCode": 200, "body": json.dumps(body) } 
+    return ret 
+    
+
